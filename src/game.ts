@@ -1,3 +1,4 @@
+import { Console } from 'console';
 import { gameLogic, getInitialState, getUnoccupiedLocation } from './logic';
 import { Command, Commands, IGameState } from './models';
 
@@ -49,7 +50,9 @@ export class Game {
       ...location,
       id,
       name,
+      speed: 1,
       score: 1,
+      visible: true
     });
   }
 

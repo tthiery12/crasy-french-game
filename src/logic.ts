@@ -30,30 +30,46 @@ function evaluateCommands(state: IGameState, commands: Commands) {
     }
     const command = commands[playerId];
     if (command === 'up') {
-      const newY = player.y - 1;
+      const newY = player.y - player.speed;
       if (newY < 0) {
         return;
       }
       player.y = newY;
     } else if (command === 'down') {
-      const newY = player.y + 1;
+      const newY = player.y + player.speed;
       if (newY > state.fieldSize.height) {
         return;
       }
       player.y = newY;
     } else if (command === 'left') {
-      const newX = player.x - 1;
+      const newX = player.x - player.speed;
       if (newX < 0) {
         return;
       }
       player.x = newX;
     } else if (command === 'right') {
-      const newX = player.x + 1;
+      const newX = player.x + player.speed;
       if (newX > state.fieldSize.width) {
         return;
       }
       player.x = newX;
-    }
+    } else if (command === 'Random') {
+      const newX = player.x + Math.floor(Math.random() * 20 - 10);
+      const newY = player.y + Math.floor(Math.random() * 20 - 10);
+
+      if (newX > state.fieldSize.width) {
+        return;
+      }
+      if (newY > state.fieldSize.height) {
+        return;
+      }
+      player.x = newX;
+      player.y = newY;
+    } else if (command === 'Invisible') {
+      player.visible = !player.visible;
+    }  else if (command === 'Boost') {
+      player.speed = player.speed === 10 ? 1 : 10;;
+    } 
   });
 }
 

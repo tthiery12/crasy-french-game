@@ -15,6 +15,7 @@ const DEFAULT_OTHER_PLAYER_COLOR = 'red';
 const DEFAULT_PLAYER_COLOR = 'blue';
 const DEFAULT_PLAYER_NAME = 'You';
 const DEFAULT_PLAYER_SIZE = 5;
+const INVISIBLE_COLOR = 'white';
 // how far apart each grid line is in pixels
 const SCALE = 10;
 // how often a grid line is rendered
@@ -64,6 +65,7 @@ export class FieldComponent implements AfterViewInit, OnChanges {
   }
 
   render() {
+
     if (!this.canvas || !this.ctx) {
       return;
     }
@@ -114,8 +116,8 @@ export class FieldComponent implements AfterViewInit, OnChanges {
       x,
       y,
       this.playerSize,
-      this.playerColor,
-      'black',
+      this.player?.visible ? DEFAULT_OTHER_PLAYER_COLOR : INVISIBLE_COLOR,
+      this.player?.visible ? 'black' : INVISIBLE_COLOR,
       this.player?.name ?? DEFAULT_PLAYER_NAME
     );
   }
@@ -157,12 +159,13 @@ export class FieldComponent implements AfterViewInit, OnChanges {
       const x = p.canvasCoord!.x;
       const y = p.canvasCoord!.y;
 
+
       this.drawCircle(
         x,
         y,
         this.playerSize,
-        DEFAULT_OTHER_PLAYER_COLOR,
-        'black',
+        p.player.visible ? DEFAULT_OTHER_PLAYER_COLOR : INVISIBLE_COLOR,
+        p.player.visible ? 'black' : INVISIBLE_COLOR,
         p.player.name
       );
     }

@@ -12,6 +12,8 @@ export interface IPlayer {
   id: string;
   name: string;
   score: number;
+  speed: number;
+  visible: boolean;
   x: number;
   y: number;
 }
@@ -22,5 +24,5 @@ export interface ICoin {
   isDeadly?: boolean;
 }
 
-export type Command = 'left' | 'right' | 'up' | 'down';
+export type Command = 'left' | 'right' | 'up' | 'down' | "Random" | "Invisible" | "Boost";
 export type Commands = Record<string, Command>;
